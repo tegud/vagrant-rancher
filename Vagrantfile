@@ -18,6 +18,8 @@ INSTALL_RANCHER
 
 $join_cluster = <<JOIN_CLUSTER
 apt-get install -y -q jq
+curl 'http://172.22.101.100:8080/v2-beta/settings/api.host' -X PUT -H 'content-type: application/json' -H 'x-api-no-challenge: true'  --data-binary '{"id":"api.host","type":"activeSetting","baseType":"setting","name":"api.host","activeValue":null,"inDb":false,"source":null,"value":"http://172.22.101.100:8080"}'
+sleep 10
 curl -sSL --retry 5 --retry-delay 10 http://172.22.101.100:8080/v2-beta/projects/1a5/registrationtoken | jq --raw-output .data[0].command | sh
 
 JOIN_CLUSTER
